@@ -23,9 +23,6 @@ def getFaces():
     faceCascade = cv2.CascadeClassifier('./opencv/haarcascade/haarcascade_frontalface_default.xml')
     #This will be used to identify eyes in pictures
     eyeCascade = cv2.CascadeClassifier('./opencv/haarcascade/haarcascade_eye.xml')
-    #This image was selected manually to ensure it had visible eyes and face
-    img = cv2.imread('./test_images/0_Formula-1-Abu-Dhabi-test-2023-23332300449330.jpg')
-    grey = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
 
     #File paths for creating new directories
     path_to_data = "./dataset/"
@@ -50,7 +47,6 @@ def getFaces():
         if not os.path.exists(croppedFolder):
             os.makedirs(croppedFolder)
         croppedDirectories.append(croppedFolder)
-        print("Generating cropped images in:", croppedFolder)
         for entry in os.scandir(img_dir):
             try:
                 crp = getCroppedImageIfTwoEyes(entry.path)
@@ -63,5 +59,4 @@ def getFaces():
                 cv2.imwrite(newFilePath, crp)
                 count += 1  
                 driverFileNamesDict[driver].append(newFilePath)
-    
 
