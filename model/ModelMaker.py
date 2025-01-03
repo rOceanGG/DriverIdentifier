@@ -5,6 +5,19 @@ from matplotlib import pyplot as plt
 import shutil
 import os
 import pywt
+import pandas as pd
+import joblib
+import sklearn
+from sklearn.svm import SVC
+from sklearn.preprocessing import StandardScaler
+from sklearn.model_selection import train_test_split
+from sklearn.pipeline import Pipeline
+from sklearn.metrics import classification_report
+from sklearn import svm
+from sklearn.ensemble import RandomForestClassifier
+from sklearn.linear_model import LogisticRegression
+from sklearn.pipeline import make_pipeline
+from sklearn.model_selection import GridSearchCV
 
 class ModelMaker:
     def __init__(self):
@@ -17,6 +30,33 @@ class ModelMaker:
         self.DriverFileNamesDictionary = {}
         self.IMAGES = []
         self.NAMES = []
+        self.IMAGESTRAIN = None
+        self.IMAGESTEST = None
+        self.NAMESTRAIN = None
+        self.NAMESTEST = None
+        self.bestEstimators = {}
+        self.scores = []
+        self.MODELPARAMETERS = {
+            'svm' : {
+                'model': svm.SVC(gamma = 'auto', probability = True),
+                'params': {
+                    'svc__C': [1,10,100,1000],
+                    'svc__kernel': ['rbf', 'linear']
+                }
+            },
+            'random_forest' : {
+                'model' : RandomForestClassifier(),
+                'params' : {
+                    'randomforestclassifier__n_estimators' : [1,5,10]
+                }
+            },
+            'logistic_regression' : {
+                'model' : LogisticRegression(solver = 'liblinear', multi_class = 'auto'),
+                'params' : {
+                    'logisticregression__C': [1,5,10]
+                }
+            }
+        }
 
     def getFaces(self):
         #This function will be used on individual images to grab the faces of the drivers
@@ -127,3 +167,46 @@ class ModelMaker:
                 self.NAMES.append(self.classificationDictionary[driverName])
         
         self.IMAGES = np.array(self.IMAGES).reshape(len(self.IMAGES),4096).astype(float)
+    
+    def trainModel(self):
+        self.IMAGESTRAIN, self.IMAGESTEST, self.NAMESTRAIN, self.NAMESTEST = train_test_split(self.IMAGES, self.NAMES, random_state = 0)
+        #Parameters will be changed later if needed
+        pipe = Pipeline([('scaler', StandardScaler()), ('svc', SVC(kernel = 'rbf', C = 100))])
+        pipe.fit(self.IMAGESTRAIN, self.NAMESTRAIN)
+        return pipe.score(self.IMAGESTEST, self.NAMESTEST)
+
+    def testModels(self):
+        for algorithm, modelParameters in self.MODELPARAMETERS.items():
+            pipe = make_pipeline(StandardScaler(), modelParameters['model'])
+            clf = GridSearchCV(pipe, modelParameters['params'], cv = 5, return_train_score = False)
+            clf.fit(self.IMAGESTRAIN, self.NAMESTRAIN)
+            self.scores.append({
+                'model' : algorithm,
+                'best_score' : clf.best_score_,
+                'best_params' : clf.best_params_
+            })
+            self.bestEstimators[algorithm] = clf.best_estimator_
+        
+        df = pd.DataFrame(self.scores, columns=['model', 'best_score', 'best_params'])
+        return df
+    
+    def findBestModel(self):
+        bestCLM = None
+        bestScore = -1
+
+        for model in ['logistic_regression', 'svm', 'random_forest']:
+            curScore = self.bestEstimators[model].score(self.IMAGESTEST, self.NAMESTEST)
+            if curScore > bestScore:
+                bestScore = curScore
+                bestCLM = model
+        
+        return bestCLM
+    
+    def createModel(self):
+        self.getFaces()
+        self.createClassificationDictionary()
+        self.formImagesAndNames()
+        self.trainModel
+        self.testModels()
+        bestModel = self.findBestModel()
+        joblib.dump(bestModel, 'savedModel.pkl')
