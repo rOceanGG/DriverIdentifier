@@ -125,3 +125,5 @@ class ModelMaker:
                 stacked = np.vstack((scaledRawImage.reshape(32*32*3, 1), scaledHarImage.reshape(32*32, 1)))
                 self.IMAGES.append(stacked)
                 self.NAMES.append(self.classificationDictionary[driverName])
+        
+        self.IMAGES = np.array(self.IMAGES).reshape(len(self.IMAGES),4096).astype(float)
