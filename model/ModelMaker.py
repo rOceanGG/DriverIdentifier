@@ -15,6 +15,8 @@ class ModelMaker:
         self.classificationDictionary = {}
         self.CroppedImageDirectories = []
         self.DriverFileNamesDictionary = {}
+        self.IMAGES = []
+        self.NAMES = []
 
     def getFaces(self):
         #This function will be used on individual images to grab the faces of the drivers
@@ -78,7 +80,7 @@ class ModelMaker:
                     self.DriverFileNamesDictionary[driver].append(newFileName)
                     count += 1
 
-    def waveletTransform(image, mode='haar', level = 1):
+    def waveletTransform(self, image, mode='haar', level = 1):
         imageArray = image
 
         # First the image is converted to grayscale
@@ -107,3 +109,19 @@ class ModelMaker:
         for driverName in self.DriverFileNamesDictionary.keys():
             self.classificationDictionary[driverName] = count
             count += 1
+    
+    # This function fills up the names and images arrays. They are parallel arrays where at a given index i,
+    # images[i] will contain an image that belongs to the driver at names[i]
+    def formImagesAndNames(self):
+        for driverName, trainingFiles in self.DriverFileNamesDictionary.items():
+            for trainingImage in trainingFiles:
+                # Read the image and resize it to a standard size (32x32 pixels)
+                img = cv2.imread(trainingImage)
+                scaledRawImage = cv2.resize(img, (32,32))
+                # Transform the image using the wavelet transformation function and then resize it
+                imgHar = self.waveletTransform(img, 'db1', 5)
+                scaledHarImage = cv2.resize(imgHar, (32,32))
+                # Stack the raw and wavelet transformed image on top of one another and put them in the images array
+                stacked = np.vstack((scaledRawImage.reshape(32*32*3, 1), scaledHarImage.reshape(32*32, 1)))
+                self.IMAGES.append(stacked)
+                self.NAMES.append(self.classificationDictionary[driverName])
