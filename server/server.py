@@ -1,10 +1,10 @@
 from flask import Flask, request, jsonify
-
+import util
 app = Flask(__name__)
 
-@app.route('/hello')
-def hello():
-    return "hi"
+@app.route('/classify-image', methods = ['GET', 'POST'])
+def classify_image():
+    return "This page classifies images"
 
 
 if __name__ == '__main__':

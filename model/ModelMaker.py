@@ -61,13 +61,16 @@ class ModelMaker:
 
     def getFaces(self):
         #This function will be used on individual images to grab the faces of the drivers
-        def getCroppedImageWithTwoEyes(imagePath):
+        def getCroppedFaces(imagePath):
             img = cv2.imread(imagePath)
             gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
             faces = self.faceCascade.detectMultiScale(gray, 1.3,5)
+            croppedFaces = []
             for(x,y,w,h) in faces:
                 regionOfInterestColour = img[y:y+h, x:x+w]
-                return regionOfInterestColour
+                croppedFaces.append(regionOfInterestColour)
+
+            return croppedFaces
         
         # The following 3 lines simply find which directories to scan through when processing each image
         ImageDirectories = []
@@ -101,22 +104,23 @@ class ModelMaker:
 
             for entry in os.scandir(imageDirectory):
                 try:
-                    croppedImage = getCroppedImageWithTwoEyes(entry.path)
+                    croppedImages = getCroppedFaces(entry.path)
                 except:
-                    croppedImage = None
+                    croppedImages = None
                 
                 # If a face with two eyes is found, it's cropped and saved as a new image in the respective folder.
-                if croppedImage is not None:
-                    # Creates a unique file name via the usage of the count variable.
-                    newFileName = driver + str(count) + ".png"
-                    # New file path will have to be in the directory with all new cropped images for the respective driver.
-                    newFilePath = croppedFolder + "/" + newFileName
+                if croppedImages is not None:
+                    for img in croppedImages:
+                        # Creates a unique file name via the usage of the count variable.
+                        newFileName = driver + str(count) + ".png"
+                        # New file path will have to be in the directory with all new cropped images for the respective driver.
+                        newFilePath = croppedFolder + "/" + newFileName
 
-                    # Saves the cropped image in the new folder
-                    cv2.imwrite(newFilePath, croppedImage)
-                    # Adds the new file name to the list of file names for the current driver
-                    self.DriverFileNamesDictionary[driver].append(newFileName)
-                    count += 1
+                        # Saves the cropped image in the new folder
+                        cv2.imwrite(newFilePath, img)
+                        # Adds the new file name to the list of file names for the current driver
+                        self.DriverFileNamesDictionary[driver].append(newFileName)
+                        count += 1
 
     def waveletTransform(self, image, mode='haar', level = 1):
         imageArray = image
