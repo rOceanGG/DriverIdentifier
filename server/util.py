@@ -66,4 +66,4 @@ def getB64TestForKimi():
 
 if __name__ == "__main__":
     loadArtifacts()
-    print(classifyImage(getB64TestForYuki(), None))
+    print(classifyImage(getB64TestForKimi(), None))
