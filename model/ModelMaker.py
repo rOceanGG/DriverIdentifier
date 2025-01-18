@@ -8,6 +8,7 @@ import pywt
 import pandas as pd
 import joblib
 import sklearn
+import json
 from sklearn.svm import SVC
 from sklearn.preprocessing import StandardScaler
 from sklearn.model_selection import train_test_split
@@ -21,8 +22,8 @@ from sklearn.model_selection import GridSearchCV
 
 class ModelMaker:
     def __init__(self):
-        self.faceCascade = cv2.CascadeClassifier('DriverIdentifier/model/opencv/haarcascade/haarcascade_frontalface_default.xml')
-        self.eyeCascade  = cv2.CascadeClassifier('DriverIdentifier/model/opencv/haarcascade/haarcascade_eye.xml')
+        self.faceCascade = cv2.CascadeClassifier('./model/opencv/haarcascade/haarcascade_frontalface_default.xml')
+        self.eyeCascade  = cv2.CascadeClassifier('./model/opencv/haarcascade/haarcascade_eye.xml')
         self.DATAPATH = "./model/dataset/"
         self.CROPPEDDATAPATH = "./model/dataset/cropped/"
         self.classificationDictionary = {}
@@ -65,11 +66,8 @@ class ModelMaker:
             gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
             faces = self.faceCascade.detectMultiScale(gray, 1.3,5)
             for(x,y,w,h) in faces:
-                regionOfInterestGray = gray[y:y+h, x:x+w]
                 regionOfInterestColour = img[y:y+h, x:x+w]
-                eyes = self.eyeCascade.detectMultiScale(regionOfInterestGray)
-                if len(eyes) >= 2:
-                    return regionOfInterestColour
+                return regionOfInterestColour
         
         # The following 3 lines simply find which directories to scan through when processing each image
         ImageDirectories = []
@@ -108,7 +106,7 @@ class ModelMaker:
                     croppedImage = None
                 
                 # If a face with two eyes is found, it's cropped and saved as a new image in the respective folder.
-                if croppedImage:
+                if croppedImage is not None:
                     # Creates a unique file name via the usage of the count variable.
                     newFileName = driver + str(count) + ".png"
                     # New file path will have to be in the directory with all new cropped images for the respective driver.
@@ -156,7 +154,11 @@ class ModelMaker:
         for driverName, trainingFiles in self.DriverFileNamesDictionary.items():
             for trainingImage in trainingFiles:
                 # Read the image and resize it to a standard size (32x32 pixels)
-                img = cv2.imread(trainingImage)
+                try:
+                    img = cv2.imread("./model/dataset/cropped/" + driverName + "/" + trainingImage)
+                except:
+                    continue
+                if img is None: continue
                 scaledRawImage = cv2.resize(img, (32,32))
                 # Transform the image using the wavelet transformation function and then resize it
                 imgHar = self.waveletTransform(img, 'db1', 5)
@@ -200,13 +202,20 @@ class ModelMaker:
                 bestScore = curScore
                 bestCLM = model
         
-        return bestCLM
+        return self.bestEstimators[bestCLM]
     
     def createModel(self):
         self.getFaces()
         self.createClassificationDictionary()
         self.formImagesAndNames()
-        self.trainModel
-        self.testModels()
+        self.trainModel()
+        print(self.testModels())
         bestModel = self.findBestModel()
         joblib.dump(bestModel, 'savedModel.pkl')
+        with open("class_dictionary.json", 'w') as f:
+            f.write(json.dumps(self.classificationDictionary))
+    
+
+m = ModelMaker()
+
+m.createModel()
