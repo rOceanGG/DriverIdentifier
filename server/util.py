@@ -10,11 +10,11 @@ __model = None
 
 def loadArtifacts():
     global __class_name_to_number
-    global __number_to_name
+    global __class_number_to_name
 
     with open("./server/artifacts/class_dictionary.json") as f:
         __class_name_to_number = json.load(f)
-        __number_to_name = {v: k for k, v in __class_name_to_number.items()}
+        __class_number_to_name = {v: k for k, v in __class_name_to_number.items()}
     
     global __model
     if __model is None:
@@ -22,8 +22,10 @@ def loadArtifacts():
             __model = joblib.load(f)
     
 def classifyImage(imageB64, filePath = None):
+    # Looks for all faces in the input image
     imgs = getCroppedFaces(filePath, imageB64)
-    result = []
+    # Setting the default result should a face not be found
+    result = {"DriverName": "Unknown", "DriverProbability": 0}
     for img in imgs:
         scaledRawImage = cv2.resize(img, (32,32))
         imgHar = waveletTransform(img, 'db1', 5)
@@ -34,9 +36,15 @@ def classifyImage(imageB64, filePath = None):
 
         finalImg = stacked.reshape(1,imgArrLen).astype(float)
 
-        result.append(__model.predict(finalImg)[0])
+        curProb = max(__model.predict_proba(finalImg)[0])
+
+        # First condition checks if this face had a better match than any of the previous ones.
+        # Second condition ensures that we have a degree of certainty we actually have a face that matches a driver
+        if curProb > result["DriverProbability"] and curProb > 0.5:
+            result["DriverName"] = getDriverNameFromID(__model.predict(finalImg)[0])
+            result["DriverProbability"] = curProb
     
-    return int(result[0])
+    return result
 
 def getCv2ImageFromB64String(B64Str):
     encoded = B64Str.split(',')[1]
@@ -45,6 +53,7 @@ def getCv2ImageFromB64String(B64Str):
     return img
 
 def getCroppedFaces(imagePath, imageB64):
+    # This function is just copied from modelmaker with some tiny changes
     faceCascade = cv2.CascadeClassifier('./server/opencv/haarcascade/haarcascade_frontalface_default.xml')
     if imagePath:
         img = cv2.imread(imagePath)
@@ -59,11 +68,30 @@ def getCroppedFaces(imagePath, imageB64):
     
     return croppedFaces
 
+def getDriverNameFromID(driverID):
+    return __class_number_to_name.get(driverID, "Unknown")
+
 def getB64TestForKimi():
     with open("./server/b64.txt") as f:
         return f.read()
 
-
 if __name__ == "__main__":
     loadArtifacts()
-    print(classifyImage(getB64TestForKimi(), None))
+    # Tests
+    # res = classifyImage(None, "./model/dataset/CarlosSainz/gettyimages-2131328781-612x612.jpg")
+    # print(f"Driver: {res["DriverName"]}")
+    # print(f"Probability: {res['DriverProbability']}")
+    # Expect Output: Carlos Sainz
+    # Actual Output: Carlos Sainz (TEST PASSED)
+
+    # res = classifyImage(getB64TestForKimi())
+    # print(f"Driver: {res["DriverName"]}")
+    # print(f"Probability: {res['DriverProbability']}")
+    # Expect Output: Kimi Antonelli
+    # Actual Output: Kimi Antonelli (TEST PASSED)
+
+    # res = classifyImage(None, 'model/dataset/CharlesLeclerc/gettyimages-1770581579-612x612.jpg')
+    # print(f"Driver: {res["DriverName"]}")
+    # print(f"Probability: {res['DriverProbability']}")
+    # Expect Output: Charles Leclerc
+    # Actual Output: Charles Leclerc (TEST PASSED)
