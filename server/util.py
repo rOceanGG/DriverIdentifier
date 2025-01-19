@@ -36,7 +36,7 @@ def classifyImage(imageB64, filePath = None):
 
         result.append(__model.predict(finalImg)[0])
     
-    return result
+    return int(result[0])
 
 def getCv2ImageFromB64String(B64Str):
     encoded = B64Str.split(',')[1]
