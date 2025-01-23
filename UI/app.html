@@ -4,375 +4,282 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sports Person Classifier</title>
+    <title>Driver Identifier</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
     <link rel="stylesheet" href="./dropzone.min.css">
     <link rel="stylesheet" href="./app.css">
 </head>
 
 <body>
-    <nav class="navbar navbar-light bg-light justify-content-center">
-        <a class="navbar-brand" href="#">Sports Person Classifier</a>
+    <nav class="navbar">
+        <h1>Driver Identifier</h1>
     </nav>
 
     <div class="container">
-        <div class="row">
-            <div class="col card-wrapper" data-player="AlexanderAlbon">
-                <div class="card border-0">
-                    <div class="position-relative rounded-circle overflow-hidden mx-auto custom-circle-image">
-                        <img class="w-100 h-100" src="./images/AAPortrait.jpeg" alt="Card image cap">
-                    </div>
-                    <div class="card-body text-center mt-4">
-                        <h4 class="text-uppercase card-title">Alexander Albon</h4>
-                        </p>
-                    </div>
+        <div class="col card-wrapper" data-player="AlexanderAlbon">
+            <div class="card border-0">
+                <div class="custom-circle-image">
+                    <img class="w-100 h-100" src="./images/AAPortrait.jpeg" alt="Card image cap">
+                </div>
+                <div class="card-body text-center mt-4">
+                    <h4 class="text-uppercase card-title">Alexander Albon</h4>
+                    </p>
                 </div>
             </div>
-            <div class="col card-wrapper" data-player="CharlesLeclerc">
-                <div class="card border-0">
-                    <div class="position-relative rounded-circle overflow-hidden mx-auto custom-circle-image">
-                        <img class="w-100 h-100" src="./images/CLPortrait.jpeg" alt="Card image cap">
-                    </div>
-                    <div class="card-body text-center mt-4">
-                        <h4 class="text-uppercase card-title">Charles Leclerc</h4>
-                        </p>
-                    </div>
+        </div>
+        <div class="col card-wrapper" data-player="CharlesLeclerc">
+            <div class="card border-0">
+                <div class="custom-circle-image">
+                    <img class="w-100 h-100" src="./images/CLPortrait.jpeg" alt="Card image cap">
+                </div>
+                <div class="card-body text-center mt-4">
+                    <h4 class="text-uppercase card-title">Charles Leclerc</h4>
+                    </p>
                 </div>
             </div>
-            <div class="col card-wrapper" data-player="CarlosSainz">
-                <div class="card border-0">
-                    <div class="position-relative rounded-circle overflow-hidden mx-auto custom-circle-image">
-                        <img class="w-100 h-100" src="./images/CSPortrait.jpeg" alt="Card image cap">
-                    </div>
-                    <div class="card-body text-center mt-4">
-                        <h4 class="text-uppercase card-title">Carlos Sainz</h4>
-                        </p>
-                    </div>
+        </div>
+        <div class="col card-wrapper" data-player="CarlosSainz">
+            <div class="card border-0">
+                <div class="custom-circle-image">
+                    <img class="w-100 h-100" src="./images/CSPortrait.jpeg" alt="Card image cap">
+                </div>
+                <div class="card-body text-center mt-4">
+                    <h4 class="text-uppercase card-title">Carlos Sainz</h4>
+                    </p>
                 </div>
             </div>
-
-            <div class="col card-wrapper" data-player="EstebanOcon">
-                <div class="card border-0">
-                    <div class="position-relative rounded-circle overflow-hidden mx-auto custom-circle-image">
-                        <img class="w-100 h-100" src="./images/EOPortrait.jpeg" alt="Card image cap">
-                    </div>
-                    <div class="card-body text-center mt-4">
-                        <h4 class="text-uppercase card-title">Esteban Ocon</h4>
-                        </p>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col card-wrapper" data-player="FernandoAlonso">
-                <div class="card border-0">
-                    <div class="position-relative rounded-circle overflow-hidden mx-auto custom-circle-image">
-                        <img class="w-100 h-100" src="./images/FAPortrait.jpeg" alt="Card image cap">
-                    </div>
-                    <div class="card-body text-center mt-4">
-                        <h4 class="text-uppercase card-title">Fernando Alonso</h4>
-                        </p>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col card-wrapper" data-player="GabrielBortoleto">
-                <div class="card border-0">
-                    <div class="position-relative rounded-circle overflow-hidden mx-auto custom-circle-image">
-                        <img class="w-100 h-100" src="./images/GBPortrait.jpeg" alt="Card image cap">
-                    </div>
-                    <div class="card-body text-center mt-4">
-                        <h4 class="text-uppercase card-title">Gabriel Bortoleto</h4>
-                        </p>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col card-wrapper" data-player="GeorgeRussell">
-                <div class="card border-0">
-                    <div class="position-relative rounded-circle overflow-hidden mx-auto custom-circle-image">
-                        <img class="w-100 h-100" src="./images/GRPortrait.jpeg" alt="Card image cap">
-                    </div>
-                    <div class="card-body text-center mt-4">
-                        <h4 class="text-uppercase card-title">George Russell</h4>
-                        </p>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col card-wrapper" data-player="IsackHadjar">
-                <div class="card border-0">
-                    <div class="position-relative rounded-circle overflow-hidden mx-auto custom-circle-image">
-                        <img class="w-100 h-100" src="./images/IHPortrait.jpeg" alt="Card image cap">
-                    </div>
-                    <div class="card-body text-center mt-4">
-                        <h4 class="text-uppercase card-title">Isack Hadjar</h4>
-                        </p>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col card-wrapper" data-player="JackDoohan">
-                <div class="card border-0">
-                    <div class="position-relative rounded-circle overflow-hidden mx-auto custom-circle-image">
-                        <img class="w-100 h-100" src="./images/JDPortrait.jpeg" alt="Card image cap">
-                    </div>
-                    <div class="card-body text-center mt-4">
-                        <h4 class="text-uppercase card-title">Jack Doohan</h4>
-                        </p>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col card-wrapper" data-player="KimiAntonelli">
-                <div class="card border-0">
-                    <div class="position-relative rounded-circle overflow-hidden mx-auto custom-circle-image">
-                        <img class="w-100 h-100" src="./images/KAPortrait.jpeg" alt="Card image cap">
-                    </div>
-                    <div class="card-body text-center mt-4">
-                        <h4 class="text-uppercase card-title">Kimi Antonelli</h4>
-                        </p>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col card-wrapper" data-player="LewisHamilton">
-                <div class="card border-0">
-                    <div class="position-relative rounded-circle overflow-hidden mx-auto custom-circle-image">
-                        <img class="w-100 h-100" src="./images/LHPortrait.jpeg" alt="Card image cap">
-                    </div>
-                    <div class="card-body text-center mt-4">
-                        <h4 class="text-uppercase card-title">Lewis Hamilton</h4>
-                        </p>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col card-wrapper" data-player="LiamLawson">
-                <div class="card border-0">
-                    <div class="position-relative rounded-circle overflow-hidden mx-auto custom-circle-image">
-                        <img class="w-100 h-100" src="./images/LLPortrait.jpeg" alt="Card image cap">
-                    </div>
-                    <div class="card-body text-center mt-4">
-                        <h4 class="text-uppercase card-title">Liam Lawson</h4>
-                        </p>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col card-wrapper" data-player="LandoNorris">
-                <div class="card border-0">
-                    <div class="position-relative rounded-circle overflow-hidden mx-auto custom-circle-image">
-                        <img class="w-100 h-100" src="./images/LNPortrait.jpeg" alt="Card image cap">
-                    </div>
-                    <div class="card-body text-center mt-4">
-                        <h4 class="text-uppercase card-title">Lando Norris</h4>
-                        </p>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col card-wrapper" data-player="LanceStroll">
-                <div class="card border-0">
-                    <div class="position-relative rounded-circle overflow-hidden mx-auto custom-circle-image">
-                        <img class="w-100 h-100" src="./images/LSPortrait.jpeg" alt="Card image cap">
-                    </div>
-                    <div class="card-body text-center mt-4">
-                        <h4 class="text-uppercase card-title">Lance Stroll</h4>
-                        </p>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col card-wrapper" data-player="MaxVerstappen">
-                <div class="card border-0">
-                    <div class="position-relative rounded-circle overflow-hidden mx-auto custom-circle-image">
-                        <img class="w-100 h-100" src="./images/MVPortrait.jpeg" alt="Card image cap">
-                    </div>
-                    <div class="card-body text-center mt-4">
-                        <h4 class="text-uppercase card-title">Max Verstappen</h4>
-                        </p>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col card-wrapper" data-player="NicoHulkenberg">
-                <div class="card border-0">
-                    <div class="position-relative rounded-circle overflow-hidden mx-auto custom-circle-image">
-                        <img class="w-100 h-100" src="./images/NHPortrait.jpeg" alt="Card image cap">
-                    </div>
-                    <div class="card-body text-center mt-4">
-                        <h4 class="text-uppercase card-title">Nico Hulkenberg</h4>
-                        </p>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col card-wrapper" data-player="OliverBearman">
-                <div class="card border-0">
-                    <div class="position-relative rounded-circle overflow-hidden mx-auto custom-circle-image">
-                        <img class="w-100 h-100" src="./images/OBPortrait.jpeg" alt="Card image cap">
-                    </div>
-                    <div class="card-body text-center mt-4">
-                        <h4 class="text-uppercase card-title">Oliver Bearman</h4>
-                        </p>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col card-wrapper" data-player="OscarPiastri">
-                <div class="card border-0">
-                    <div class="position-relative rounded-circle overflow-hidden mx-auto custom-circle-image">
-                        <img class="w-100 h-100" src="./images/OPPortrait.jpeg" alt="Card image cap">
-                    </div>
-                    <div class="card-body text-center mt-4">
-                        <h4 class="text-uppercase card-title">Oscar Piastri</h4>
-                        </p>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col card-wrapper" data-player="PierreGasly">
-                <div class="card border-0">
-                    <div class="position-relative rounded-circle overflow-hidden mx-auto custom-circle-image">
-                        <img class="w-100 h-100" src="./images/PGPortrait.jpeg" alt="Card image cap">
-                    </div>
-                    <div class="card-body text-center mt-4">
-                        <h4 class="text-uppercase card-title">Pierre Gasly</h4>
-                        </p>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col card-wrapper" data-player="YukiTsunoda">
-                <div class="card border-0">
-                    <div class="position-relative rounded-circle overflow-hidden mx-auto custom-circle-image">
-                        <img class="w-100 h-100" src="./images/YTPortrait.jpeg" alt="Card image cap">
-                    </div>
-                    <div class="card-body text-center mt-4">
-                        <h4 class="text-uppercase card-title">Yuki Tsunoda</h4>
-                        </p>
-                    </div>
-                </div>
-            </div>
-
         </div>
 
-        <div class="row">
-            <div class="col-sm-4">
-                <div class="row">
-                    <div class="col-12 mx-auto">
-                        <form action="/file-upload" class="dropzone" id="dropzone">
-                            <div class="dz-message needsclick">
-                                <img src="./images/upload.png" width="50vw" height="50vw"><br>
-                                <span class="note needsclick">Drop files here or click to upload</span>
-                            </div>
-                        </form>
-                    </div>
+        <div class="col card-wrapper" data-player="EstebanOcon">
+            <div class="card border-0">
+                <div class="custom-circle-image">
+                    <img class="w-100 h-100" src="./images/EOPortrait.jpeg" alt="Card image cap">
                 </div>
-                <div class="row mt-3">
-                    <div class="col-3 mx-auto">
-                        <button id="submitBtn" type="button" class="btn btn-success">Classify</button>
-                    </div>
+                <div class="card-body text-center mt-4">
+                    <h4 class="text-uppercase card-title">Esteban Ocon</h4>
+                    </p>
                 </div>
             </div>
-
-            <div class="col-sm-8 error" id="error">
-                <p>Can't classify image. Classifier was not able to detect face and two eyes properly</p>
-            </div>
-
-            <div class="col-sm-4" id="resultHolder">
-            </div>
-            <div class="col-sm-4" id="divClassTable">
-                <table id="classTable">
-                    <tr>
-                        <th>Player</th>
-                        <th>Probability Score</th>
-                    </tr>
-                    <tr>
-                        <td>Alexander Albon</td>
-                        <td id="scoreAlexanderAlbon"></td>
-                    </tr>
-                    <tr>
-                        <td>Charles Leclerc</td>
-                        <td id="scoreCharlesLeclerc"></td>
-                    </tr>
-                    <tr>
-                        <td>Carlos Sainz</td>
-                        <td id="scoreCarlosSainz"></td>
-                    </tr>
-                    <tr>
-                        <td>Esteban Ocon</td>
-                        <td id="scoreEstebanOcon"></td>
-                    </tr>
-                    <tr>
-                        <td>Fernando Alonso</td>
-                        <td id="scoreFernandoAlonso"></td>
-                    </tr>
-                    <tr>
-                        <td>Gabriel Bortoleto </td>
-                        <td id="scoreFernandoAlonso"></td>
-                    </tr>
-                    <tr>
-                        <td>George Russell</td>
-                        <td id="scoreFernandoAlonso"></td>
-                    </tr>
-                    <tr>
-                        <td>Isack Hadjar</td>
-                        <td id="scoreFernandoAlonso"></td>
-                    </tr>
-                    <tr>
-                        <td>Jack Doohan</td>
-                        <td id="scoreFernandoAlonso"></td>
-                    </tr>
-                    <tr>
-                        <td>Kimi Antonelli</td>
-                        <td id="scoreFernandoAlonso"></td>
-                    </tr>
-                    <tr>
-                        <td>Lewis Hamilton</td>
-                        <td id="scoreFernandoAlonso"></td>
-                    </tr>
-                    <tr>
-                        <td>Liam Lawson</td>
-                        <td id="scoreFernandoAlonso"></td>
-                    </tr>
-                    <tr>
-                        <td>Lando Norris</td>
-                        <td id="scoreFernandoAlonso"></td>
-                    </tr>
-                    <tr>
-                        <td>Lance Stroll</td>
-                        <td id="scoreFernandoAlonso"></td>
-                    </tr>
-                    <tr>
-                        <td>Max Verstappen</td>
-                        <td id="scoreFernandoAlonso"></td>
-                    </tr>
-                    <tr>
-                        <td>Nico Hulkenberg</td>
-                        <td id="scoreFernandoAlonso"></td>
-                    </tr>
-                    <tr>
-                        <td>Oliver Bearman</td>
-                        <td id="scoreFernandoAlonso"></td>
-                    </tr>
-                    <tr>
-                        <td>Oscar Piastri</td>
-                        <td id="scoreFernandoAlonso"></td>
-                    </tr>
-                    <tr>
-                        <td>Pierre Gasly</td>
-                        <td id="scoreFernandoAlonso"></td>
-                    </tr>
-                    <tr>
-                        <td>Yuki Tsunoda</td>
-                        <td id="scoreFernandoAlonso"></td>
-                    </tr>
-                </table>
-            </div>
-
         </div>
 
+        <div class="col card-wrapper" data-player="FernandoAlonso">
+            <div class="card border-0">
+                <div class="custom-circle-image">
+                    <img class="w-100 h-100" src="./images/FAPortrait.jpeg" alt="Card image cap">
+                </div>
+                <div class="card-body text-center mt-4">
+                    <h4 class="text-uppercase card-title">Fernando Alonso</h4>
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <div class="col card-wrapper" data-player="GabrielBortoleto">
+            <div class="card border-0">
+                <div class="custom-circle-image">
+                    <img class="w-100 h-100" src="./images/GBPortrait.jpeg" alt="Card image cap">
+                </div>
+                <div class="card-body text-center mt-4">
+                    <h4 class="text-uppercase card-title">Gabriel Bortoleto</h4>
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <div class="col card-wrapper" data-player="GeorgeRussell">
+            <div class="card border-0">
+                <div class="custom-circle-image">
+                    <img class="w-100 h-100" src="./images/GRPortrait.jpeg" alt="Card image cap">
+                </div>
+                <div class="card-body text-center mt-4">
+                    <h4 class="text-uppercase card-title">George Russell</h4>
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <div class="col card-wrapper" data-player="IsackHadjar">
+            <div class="card border-0">
+                <div class="custom-circle-image">
+                    <img class="w-100 h-100" src="./images/IHPortrait.jpeg" alt="Card image cap">
+                </div>
+                <div class="card-body text-center mt-4">
+                    <h4 class="text-uppercase card-title">Isack Hadjar</h4>
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <div class="col card-wrapper" data-player="JackDoohan">
+            <div class="card border-0">
+                <div class="custom-circle-image">
+                    <img class="w-100 h-100" src="./images/JDPortrait.jpeg" alt="Card image cap">
+                </div>
+                <div class="card-body text-center mt-4">
+                    <h4 class="text-uppercase card-title">Jack Doohan</h4>
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <div class="col card-wrapper" data-player="KimiAntonelli">
+            <div class="card border-0">
+                <div class="custom-circle-image">
+                    <img class="w-100 h-100" src="./images/KAPortrait.jpeg" alt="Card image cap">
+                </div>
+                <div class="card-body text-center mt-4">
+                    <h4 class="text-uppercase card-title">Kimi Antonelli</h4>
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <div class="col card-wrapper" data-player="LewisHamilton">
+            <div class="card border-0">
+                <div class="custom-circle-image">
+                    <img class="w-100 h-100" src="./images/LHPortrait.jpeg" alt="Card image cap">
+                </div>
+                <div class="card-body text-center mt-4">
+                    <h4 class="text-uppercase card-title">Lewis Hamilton</h4>
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <div class="col card-wrapper" data-player="LiamLawson">
+            <div class="card border-0">
+                <div class="custom-circle-image">
+                    <img class="w-100 h-100" src="./images/LLPortrait.jpeg" alt="Card image cap">
+                </div>
+                <div class="card-body text-center mt-4">
+                    <h4 class="text-uppercase card-title">Liam Lawson</h4>
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <div class="col card-wrapper" data-player="LandoNorris">
+            <div class="card border-0">
+                <div class="custom-circle-image">
+                    <img class="w-100 h-100" src="./images/LNPortrait.jpeg" alt="Card image cap">
+                </div>
+                <div class="card-body text-center mt-4">
+                    <h4 class="text-uppercase card-title">Lando Norris</h4>
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <div class="col card-wrapper" data-player="LanceStroll">
+            <div class="card border-0">
+                <div class="custom-circle-image">
+                    <img class="w-100 h-100" src="./images/LSPortrait.jpeg" alt="Card image cap">
+                </div>
+                <div class="card-body text-center mt-4">
+                    <h4 class="text-uppercase card-title">Lance Stroll</h4>
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <div class="col card-wrapper" data-player="MaxVerstappen">
+            <div class="card border-0">
+                <div class="custom-circle-image">
+                    <img class="w-100 h-100" src="./images/MVPortrait.jpeg" alt="Card image cap">
+                </div>
+                <div class="card-body text-center mt-4">
+                    <h4 class="text-uppercase card-title">Max Verstappen</h4>
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <div class="col card-wrapper" data-player="NicoHulkenberg">
+            <div class="card border-0">
+                <div class="custom-circle-image">
+                    <img class="w-100 h-100" src="./images/NHPortrait.jpeg" alt="Card image cap">
+                </div>
+                <div class="card-body text-center mt-4">
+                    <h4 class="text-uppercase card-title">Nico Hulkenberg</h4>
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <div class="col card-wrapper" data-player="OliverBearman">
+            <div class="card border-0">
+                <div class="custom-circle-image">
+                    <img class="w-100 h-100" src="./images/OBPortrait.jpeg" alt="Card image cap">
+                </div>
+                <div class="card-body text-center mt-4">
+                    <h4 class="text-uppercase card-title">Oliver Bearman</h4>
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <div class="col card-wrapper" data-player="OscarPiastri">
+            <div class="card border-0">
+                <div class="custom-circle-image">
+                    <img class="w-100 h-100" src="./images/OPPortrait.jpeg" alt="Card image cap">
+                </div>
+                <div class="card-body text-center mt-4">
+                    <h4 class="text-uppercase card-title">Oscar Piastri</h4>
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <div class="col card-wrapper" data-player="PierreGasly">
+            <div class="card border-0">
+                <div class="custom-circle-image">
+                    <img class="w-100 h-100" src="./images/PGPortrait.jpeg" alt="Card image cap">
+                </div>
+                <div class="card-body text-center mt-4">
+                    <h4 class="text-uppercase card-title">Pierre Gasly</h4>
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <div class="col card-wrapper" data-player="YukiTsunoda">
+            <div class="card border-0">
+                <div class="custom-circle-image">
+                    <img class="w-100 h-100" src="./images/YTPortrait.jpeg" alt="Card image cap">
+                </div>
+                <div class="card-body text-center mt-4">
+                    <h4 class="text-uppercase card-title">Yuki Tsunoda</h4>
+                    </p>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="col-sm-4">
+            <div class="row">
+                <div class="col-12 mx-auto">
+                    <form action="/file-upload" class="dropzone" id="dropzone">
+                        <div class="dz-message needsclick">
+                            <img src="./images/upload.png" width="50vw" height="50vw"><br>
+                            <span class="note needsclick">Drop files here or click to upload</span>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <div class="row mt-3">
+                <div class="col-3 mx-auto">
+                    <button id="submitBtn" type="button" class="btn btn-success">Classify</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-sm-8 error" id="error">
+            <p>Can't classify image. Classifier was not able to detect face and two eyes properly</p>
+        </div>
+
+        <div class="col-sm-4" id="resultHolder">
+            <h3>This driver is:</h3>
+        </div>
     </div>
 
 </body>

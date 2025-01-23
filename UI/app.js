@@ -2,12 +2,16 @@ Dropzone.autoDiscover = false;
 
 function init() {
     let dz = new Dropzone("#dropzone", {
-        url: "/",
+        url: "http://127.0.0.1:5000/classify-image",
         maxFiles: 1,
         addRemoveLinks: true,
-        dictDefaultMessage: "Some Message",
-        autoProcessQueue: false
+        dictDefaultMessage: "Drop files here or click to upload",
+        autoProcessQueue: false,
+        headers: {
+            "Access-Control-Allow-Origin": "*"
+        }
     });
+
     
     dz.on("addedfile", function() {
         if (dz.files[1]!=null) {
@@ -16,45 +20,41 @@ function init() {
     });
 
     dz.on("complete", function (file) {
-        let imageData = file.dataURL;
-        
-        var url = "http://127.0.0.1:5000/classify_image";
-
-        $.post(url, {
-            image_data: file.dataURL
-        },function(data, status) {
-            console.log(data);
-            if (!data || data.length==0) {
-                $("#resultHolder").hide();
-                $("#divClassTable").hide();                
-                $("#error").show();
-                return;
-            }
-            let drivers = ["AlexanderAlbon", "CharlesLeclerc", "CarlosSainz", "EstebanOcon", "FernandoAlonso", "GabrielBortoleto", "GeorgeRussell", "IsackHadjar", "JackDoohan", "KimiAntonelli", "LewisHamilton", "LiamLawson", "LandoNorris", "LanceStroll", "MaxVerstappen", "NicoHulkenberg", "OliverBearman", "OscarPiastri", "PierreGasly", "YukiTsunoda"];
+            let image_data = file.dataURL;
             
-            let match = null;
-            let bestScore = -1;
-            for (let i=0;i<data.length;++i) {
-                let maxScoreForThisClass = Math.max(...data[i].class_probability);
-                if(maxScoreForThisClass>bestScore) {
-                    match = data[i];
-                    bestScore = maxScoreForThisClass;
+            var url = "http://127.0.0.1:5000/classify-image";
+
+            $.post(url, {
+                imageData: image_data
+            },function(data, status) {
+                console.log(data);
+                if (!data || data.length==0) {
+                    $("#resultHolder").hide();              
+                    $("#error").show();
+                    return;
                 }
-            }
-            if (match) {
-                $("#error").hide();
-                $("#resultHolder").show();
-                $("#divClassTable").show();
-                $("#resultHolder").html($(`[data-player="${match.class}"`).html());
-                let classDictionary = match.class_dictionary;
-                for(let personName in classDictionary) {
-                    let index = classDictionary[personName];
-                    let proabilityScore = match.class_probability[index];
-                    let elementName = "#score_" + personName;
-                    $(elementName).html(proabilityScore);
-                }
-            }
-            // dz.removeFile(file);            
+            let drivers = ["AlexanderAlbon", "CharlesLeclerc", "CarlosSainz", "EstebanOcon", "FernandoAlonso", "GabrielBortoleto", "GeorgeRussell", "IsackHadjar", "JackDoohan", "KimiAntonelli", "LewisHamilton", "LiamLawson", "LandoNorris", "LanceStroll", "MaxVerstappen", "NicoHulkenberg", "OliverBearman", "OscarPiastri", "PierreGasly", "YukiTsunoda"];
+            //data = {"DriverName": "Kimi Antonelli","DriverProbability": 0.7527951123509639}
+        let driverName = data.DriverName;
+        let driverProbability = data.DriverProbability;
+
+        if (driverName != "Unknown") {
+            $("#error").hide();
+            $("#resultHolder").show();
+
+            // Display the matching driver card
+            $("#resultHolder").html($("[data-player='" + driverName.replace(/ /g, '') + "']").html());
+
+            // Update probability score
+            let elementName = "#score" + driverName.replace(/ /g, '');
+            $(elementName).html(driverProbability.toFixed(2)); // Show 2 decimal points
+        } else {
+            $("#resultHolder").hide();
+            $("#error").show();
+        }
+
+        // Remove the processed file
+        dz.removeFile(file);            
         });
     });
 
@@ -67,7 +67,6 @@ $(document).ready(function() {
     console.log( "ready!" );
     $("#error").hide();
     $("#resultHolder").hide();
-    $("#divClassTable").hide();
 
     init();
 });

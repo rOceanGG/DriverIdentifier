@@ -40,7 +40,7 @@ def classifyImage(imageB64, filePath = None):
 
         # First condition checks if this face had a better match than any of the previous ones.
         # Second condition ensures that we have a degree of certainty we actually have a face that matches a driver
-        if curProb > result["DriverProbability"] and curProb > 0.5:
+        if curProb > result["DriverProbability"]:
             result["DriverName"] = getDriverNameFromID(__model.predict(finalImg)[0])
             result["DriverProbability"] = curProb
     

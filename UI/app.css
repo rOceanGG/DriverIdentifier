@@ -1,101 +1,183 @@
-.container {
-    flex-wrap: wrap;
-    /* Allow wrapping to a new line if elements overflow */
-    gap: 16px;
-    /* Add spacing between cards (optional) */
-    justify-content: center;
-    /* Center the cards horizontally (optional) */
-}
-
-.row {
-    display: flex;
-    /* Ensure the row uses flexbox */
-    flex-wrap: wrap;
-    /* Allow wrapping within the row */
-    gap: 16px;
-    /* Add spacing between cards */
-    justify-content: center;
-    /* Center the cards horizontally */
-}
-
-.card-wrapper {
-    flex: 1 1 calc(33.33% - 16px);
-    /* Adjust to 3 cards per row with gaps */
-    max-width: calc(33.33% - 16px);
-    /* Ensure a maximum width for the cards */
+/* General Reset */
+* {
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    margin: 0;
+    padding: 0;
     box-sizing: border-box;
-    /* Include padding/border in width calculation */
-    min-width: 200px;
-    /* Set a minimum width to maintain readability */
+    text-align: center !important;
+}
+
+/* Body Styling */
+body {
+    background-color: #f4f4f9;
+    /* Soft gray background */
+    color: #333;
+    /* Dark text for readability */
+    line-height: 1.6;
+}
+
+/* Navbar Styling */
+.navbar {
+    background-color: #016e4e;
+    /* Dark green */
+    padding: 15px 0;
+    justify-content: center;
+    text-align: center;
+    color: white;
+    font-size: 1.8rem;
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+}
+
+/* Container for Cards */
+.container {
+    max-width: 100%;
+    margin: 20px auto;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px;
+    /* Spacing between cards */
+    justify-content: center;
+}
+
+/* Card Styling */
+.card-wrapper {
+    flex: 1 1 calc(20% - 16px);
+    /* Fit 5 cards per row */
+    max-width: 15%;
+    background-color: #fff;
+    /* White card background */
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    transition: transform 0.2s ease;
+}
+
+.card-wrapper:hover {
+    transform: translateY(-5px);
+    /* Slight lift on hover */
 }
 
 .custom-circle-image {
-    width: 150px;
-    /* Set the circle size */
-    height: 150px;
+    width: 100%;
+    height: 200px;
+    overflow: hidden;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #eaeaea;
+    /* Placeholder background */
+}
+
+.custom-circle-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.card-body {
+    padding: 15px;
+    text-align: center;
 }
 
 .card-title {
     font-size: 1.2rem;
-    /* Adjust title size */
-    margin-top: 8px;
+    font-weight: bold;
+    color: #016e4e;
+    /* Dark green */
+    text-transform: uppercase;
+    margin-top: 10px;
 }
 
-.card-wrapper {
-    margin: 5% 0;
-}
-
-/* You can adjust the image size by increasing/decreasing the width, height */
-.custom-circle-image {
-    width: 10vw;
-    /* note i used vw not px for better responsive */
-    height: 10vw;
-}
-
-.custom-circle-image img {
-    object-fit: cover;
-}
-
-.card-title {
-    letter-spacing: 1.1px;
-}
-
-.card-text {
-    font-family: MerriweatherRegular;
-    font-size: 22px;
-    line-height: initial;
-}
-
+/* Dropzone Styling */
 .dropzone {
-    border-style: dashed;
-    justify-content: center;
-}
-
-
-.error {
-    font-family: MerriweatherRegular;
-    font-size: 30px;
-    line-height: initial;
-    color: blue;
+    border: 2px dashed #016e4e;
+    /* Dark green border */
+    border-radius: 8px;
+    background-color: #fff;
+    /* White background */
+    padding: 40px;
+    /* Add sufficient padding for height */
     text-align: center;
-}
-
-#classTable {
-    font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
-    border-collapse: collapse;
     width: 100%;
+    /* Use full width of the container */
+    height: 200px;
+    /* Set a fixed height for visibility */
+    transition: background-color 0.3s ease;
+    /* Hover effect */
 }
 
-#classTable td,
-#classTable th {
-    border: 1px solid #ddd;
-    padding: 8px;
+.dropzone:hover {
+    background-color: #e6f7ee;
+    /* Light green on hover */
 }
 
-#classTable th {
-    padding-top: 12px;
-    padding-bottom: 12px;
-    text-align: left;
-    background-color: #4CAF50;
+/* Dropzone message styling */
+.dz-message {
+    color: #016e4e;
+    font-size: 1.1rem;
+    font-weight: bold;
+}
+
+/* Classify Button Styling */
+#submitBtn {
+    background-color: #016e4e;
+    /* Dark green */
     color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 20px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+#submitBtn:hover {
+    background-color: #014f38;
+    /* Darker green on hover */
+}
+
+/* Error Styling */
+.error {
+    color: #e63946;
+    /* Red for errors */
+    font-size: 1.2rem;
+    text-align: center;
+    margin: 20px 0;
+}
+
+/* Result Holder */
+#resultHolder {
+    text-align: center;
+    font-size: 1.2rem;
+    color: #016e4e;
+    /* Match theme */
+    margin-top: 20px;
+}
+
+/* Responsive Adjustments */
+@media (max-width: 1200px) {
+    .card-wrapper {
+        flex: 1 1 calc(25% - 16px);
+        /* 4 cards per row */
+        max-width: calc(25% - 16px);
+    }
+}
+
+@media (max-width: 768px) {
+    .card-wrapper {
+        flex: 1 1 calc(33.33% - 16px);
+        /* 3 cards per row */
+        max-width: calc(33.33% - 16px);
+    }
+}
+
+@media (max-width: 576px) {
+    .card-wrapper {
+        flex: 1 1 calc(50% - 16px);
+        /* 2 cards per row */
+        max-width: calc(50% - 16px);
+    }
 }
