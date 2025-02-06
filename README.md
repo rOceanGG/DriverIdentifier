@@ -1,8 +1,10 @@
 ﻿# DriverIdentifier
 
-## Instructions for demo
-1. Clone this repository to your own machine
-2. Install are required modules.
+![](https://github.com/rOceanGG/DriverIdentifier/blob/main/DriverIdentifierDemo.gif)
+
+## Wanna run it on your machine?
+1. Clone this repository.
+2. Install all required modules.
 3. Initiate the flask server by running DriverIdentifier/server/server.py (Ensure that you do not already have port 5000 being used).
 4. Use your choice of web browser and paste the complete file path to DriverIdentifier/UI/app.html
 5. Upload your choice of image and try it out for yourself.
