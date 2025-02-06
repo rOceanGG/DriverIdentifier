@@ -149,12 +149,16 @@ body {
 }
 
 /* Result Holder */
-#resultHolder {
-    text-align: center;
-    font-size: 1.2rem;
-    color: #016e4e;
-    /* Match theme */
-    margin-top: 20px;
+#resultHolder{
+    flex: 1 1 calc(20% - 16px);
+    /* Fit 5 cards per row */
+    max-width: 15%;
+    background-color: #fff;
+    /* White card background */
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    transition: transform 0.2s ease;
 }
 
 /* Responsive Adjustments */

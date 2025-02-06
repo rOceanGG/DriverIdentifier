@@ -59,6 +59,10 @@ def getCroppedFaces(imagePath, imageB64):
         img = cv2.imread(imagePath)
     else:
         img = getCv2ImageFromB64String(imageB64)
+    
+    if img is None:
+        raise ValueError("Image could not be loaded. Please check the file path or base64 string.")
+    
     gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
     faces = faceCascade.detectMultiScale(gray, 1.3,5)
     croppedFaces = []
@@ -79,19 +83,19 @@ if __name__ == "__main__":
     loadArtifacts()
     # Tests
     # res = classifyImage(None, "./model/dataset/CarlosSainz/gettyimages-2131328781-612x612.jpg")
-    # print(f"Driver: {res["DriverName"]}")
+    # print(f"Driver: {res['DriverName']}")
     # print(f"Probability: {res['DriverProbability']}")
     # Expect Output: Carlos Sainz
     # Actual Output: Carlos Sainz (TEST PASSED)
 
     # res = classifyImage(getB64TestForKimi())
-    # print(f"Driver: {res["DriverName"]}")
+    # print(f"Driver: {res['DriverName']}")
     # print(f"Probability: {res['DriverProbability']}")
     # Expect Output: Kimi Antonelli
     # Actual Output: Kimi Antonelli (TEST PASSED)
 
     # res = classifyImage(None, 'model/dataset/CharlesLeclerc/gettyimages-1770581579-612x612.jpg')
-    # print(f"Driver: {res["DriverName"]}")
+    # print(f"Driver: {res['DriverName']}")
     # print(f"Probability: {res['DriverProbability']}")
     # Expect Output: Charles Leclerc
     # Actual Output: Charles Leclerc (TEST PASSED)
